@@ -34,26 +34,7 @@ package game.level
 			addChild(cont);
 			cont.visible = false;
 			
-			// samples cont
-			cont.addChild(samplesCont);
-			samplesCont.x = 25;
-			samplesCont.y = Game.GameHeight-30;
-			samplesCont.addEventListener(MouseEvent.MOUSE_DOWN,function(e:MouseEvent):void
-			{
-				if(e.target != samplesCont)return;
-				samplesCont.startDrag();
-			});
-			samplesCont.addEventListener(MouseEvent.MOUSE_UP,function():void
-			{
-				samplesCont.stopDrag();
-			});
 			
-			
-			// editor button
-			var butt:Sprite = createEditorButton();
-			addChild(butt);
-			butt.scaleX = butt.scaleY = 1.3;
-			butt.x = Game.GameWidth;
 			butt.y = Game.GameHeight-30;
 			butt.addEventListener(MouseEvent.CLICK, function():void{
 				if(!cont.visible)on()
@@ -172,21 +153,7 @@ package game.level
 					 
 					 td++;
 						 if(td == rowNum){
-							 td = 0;
-							 tr ++;
-						 }
-					 
-					 sample.x = sS+td*sS;
-					 sample.y = -sS/2+tr*sS;
-					 
-					 sample.width = sS;
-					 sample.height = sS;
-					 samplesCont.addChild(sample);
-					 
-					 configureDrag(sample);
-			 }
-			 samplesCont.graphics.beginFill(editorColor,1);
-			 samplesCont.graphics.lineStyle(4,editorColor,1)
+				torColor,1)
 			 samplesCont.graphics.drawRect(sS/2,-sS,sS*rowNum,sS*2);
 			 samplesCont.graphics.endFill();
 			 
@@ -212,17 +179,7 @@ package game.level
 		    el.addEventListener(MouseEvent.MOUSE_UP,function():void{
 				el.stopDrag();
 				if(el.box2dbody){
-					game.engine.Engine.box2dRotateBody(el.box2dbody,el.rotation);
-					game.engine.Engine.box2dSetPosition(el.box2dbody,new Point(el.x,el.y));
-				}
-				
-				game.level.Level.engine.checkCollisions();
-				
-				showProp(el);
-			});
-			el.addEventListener(MouseEvent.MOUSE_DOWN,function():void{
-				el.startDrag();
-			});
+			
 	    }
 		
 		private function configEngineElements():void
@@ -252,19 +209,7 @@ package game.level
 		{
 			Level.engine.scaleX = Level.engine.scaleY = Z;			
 		}
-		
-		private function createEditorButton():Sprite
-		{
-			var sp:Sprite = new Sprite();
-			sp.graphics.beginFill(editorColor);
-			sp.graphics.drawCircle(0,0,30);
-			sp.graphics.endFill();
-			
-			return sp;
-		}
-		
-		/// PROPERTIES WINDOW:
-		private var prop:swc_properties = new swc_properties();
+		wc_properties = new swc_properties();
 		private var selectedTarget:SpaceBody = null;
 		private function setupPropWindow():void
 		{
@@ -292,18 +237,7 @@ package game.level
 			{
 				if(selectedTarget == null)return ;
 					
-				selectedTarget.rotation = Number(prop.rotate.text);
-			});
 		
-		    prop.btn_mass.addEventListener(MouseEvent.CLICK,function():void
-			{
-			    if(selectedTarget == null)return;
-			
-				selectedTarget.mass = Number(prop.mass.text);
-			});
-			
-			prop.btn_view3dz.addEventListener(MouseEvent.CLICK,function():void
-			{
 				if(selectedTarget == null)return;
 				
 				selectedTarget.view3dZ = Number(prop.view3dz.text);
@@ -337,14 +271,7 @@ package game.level
 		
 		private function showProp(el:SpaceBody):void
 		{
-			if(!cont.visible)return;
-			
-			selectedTarget = el;
-			
-			prop.x = 0;
-			prop.y = 100;
-			prop.visible = true;
-			
+		
 			prop.Name.text = el.toString();
 			prop.rotate.text = ""+Math.round(el.rotation*100)/100;
 			prop.mass.text = ""+Math.round(el.mass*100)/100;
