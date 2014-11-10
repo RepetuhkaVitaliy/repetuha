@@ -1,10 +1,18 @@
 package game
 {
-	/*
-	 *
-	   GAME ENGINE FRAMEWORK by REPETUKHA VITALIY.
-	*
-	*/
+		/*
+		 *
+		   GAME FRAMEWORK by REPETUKHA VITALIY. 
+		   Version 1.1
+		
+		   https://github.com/RepetukhaVitaliySource/repetuha/tree/master/game
+		
+		   Not for commercical use. 
+		   Not supported.
+		   Can be significant updates.
+		   For any questions: repetuha@gmail.com
+		*
+		*/
 		
 		import flash.display.Sprite;
 		import flash.events.Event;
